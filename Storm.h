@@ -155,7 +155,6 @@ namespace storm
 	{
 		if (!pending_commands.empty())
 		{
-			Log("!!!!!!!!!!!!!NO EMPTY!!!!!!!!!!!!!");
 			Json::Value v = pending_commands.front();
 			pending_commands.pop_front();
 			return v;

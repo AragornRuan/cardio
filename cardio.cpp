@@ -1,5 +1,6 @@
 #include <armadillo>
 #include <iomanip>
+#include <sstream>
 #include <iostream>
 #include "wavelet2d.h"
 #include "fftw3.h"
@@ -636,7 +637,11 @@ fmat learn(int sfreq, fmat& x_stt)
 		W11 = W12;
 		W21 = W22;
 		W31 = W32;
-//		if (i % 10000 == 0) Log(i);
+		if (i % 10000 == 0)  {
+            stringstream s;
+            s << i;
+            Log(s.str());
+        }
 	}
 
 	fmat W = zeros<fmat>(3, M);
@@ -649,7 +654,10 @@ fmat learn(int sfreq, fmat& x_stt)
 	WS = W*S / 300;
 
 	clock_t end = clock();
-//	 Log("learning time:" + (end - start) / (float)CLOCKS_PER_SEC + " seconds!");
+    float learnTime = (end - start) / (float)CLOCKS_PER_SEC;
+    stringstream s;
+    s << learnTime;
+	Log("learning time:" + s.str() + " seconds!");
 
 	//WS.save("1.txt", raw_ascii);
 	return WS;
